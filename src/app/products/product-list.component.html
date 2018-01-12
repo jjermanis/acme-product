@@ -40,7 +40,7 @@
                             [style.width.px]='imageWidth' [style.margin.px]='imageMargin'>
                         </td>
                         <td>{{product.name}}</td>
-                        <td>{{product.code}}</td>
+                        <td>{{product.code | convertToSpaces:"-" }}</td>
                         <td>{{product.available}}</td>
                         <td>{{product.price | currency:'USD':true:'1.2-2'}}</td>
                         <td>{{product.rating}}</td>
