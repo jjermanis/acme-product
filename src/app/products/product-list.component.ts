@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from './product';
+import { ProductService } from './product.service';
 
 @Component({
     selector: 'pm-products',
@@ -14,30 +15,11 @@ export class ProductListComponent
     showImage: boolean = false;
     _listFilter: string ;
     filteredProducts: IProduct[];
-    products: IProduct[]=
-    [
-        {
-            imageUrl:"https://peopledotcom.files.wordpress.com/2016/05/mc-hammer-02-435.jpg",
-            name:"MC Hammer",
-            code:"stop-ht",
-            available:510,
-            price:3.50,
-            rating:2.4,
-        },
-        {
-            imageUrl:"https://metrouk2.files.wordpress.com/2016/11/vanilla-ice-e1479823884816.jpg?w=748&h=599&crop=1",
-            name:"Vanilla Ice",
-            code:"stop-c&l",
-            available:123,
-            price:14.98,
-            rating:1.8,
-        },
-       
-    ];
+    products: IProduct[]= [];
 
-    constructor() {
-        this.filteredProducts = this.products;
+    constructor(private _productService : ProductService) {
     }
+
     get listFilter(): string {
         return this._listFilter;
     }
@@ -58,5 +40,7 @@ export class ProductListComponent
 
     ngOnInit(): void {
         console.log("In OnInit")
+        this.products = this._productService.getProducts();
+        this.filteredProducts = this.products;
     }
 }
