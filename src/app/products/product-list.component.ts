@@ -16,6 +16,7 @@ export class ProductListComponent
     _listFilter: string ;
     filteredProducts: IProduct[];
     products: IProduct[]= [];
+    errorMessage: string;
 
     constructor(private _productService : ProductService) {
     }
@@ -31,7 +32,7 @@ export class ProductListComponent
     performFilter(filterBy: string): IProduct[] {
         filterBy = filterBy.toLocaleLowerCase();
         return this.products.filter((product: IProduct) =>
-            product.name.toLocaleLowerCase().indexOf(filterBy) !== -1);
+            product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 
      toggleImage():void {
@@ -40,7 +41,12 @@ export class ProductListComponent
 
     ngOnInit(): void {
         console.log("In OnInit")
-        this.products = this._productService.getProducts();
-        this.filteredProducts = this.products;
+         this._productService.getProducts()
+            .subscribe(products => { 
+                        this.products = products;
+                        this.filteredProducts = this.products;
+                        },
+                        error => this.errorMessage = <any>error);
+        
     }
 }
