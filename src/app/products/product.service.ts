@@ -8,9 +8,9 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class ProductService {
 
-    private _productUrl = './api/products/products.json'
+    private _productUrl = './api/products/products.json';
 
-    constructor(private _http : HttpClient) {
+    constructor(private _http: HttpClient) {
 
     }
 

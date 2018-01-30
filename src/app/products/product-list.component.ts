@@ -5,11 +5,11 @@ import { ProductService } from './product.service';
 @Component({
     selector: 'pm-products',
     templateUrl: './product-list.component.html',
-    styleUrls: ["./product-list.component.css"],
+    styleUrls: ['./product-list.component.css'],
 })
-export class ProductListComponent 
+export class ProductListComponent
     implements OnInit {
-    pageTitle: string="Product List";
+    pageTitle: string= 'Product List';
     imageWidth: number = 50;
     imageMargin: number = 2;
     showImage: boolean = false;
@@ -18,7 +18,7 @@ export class ProductListComponent
     products: IProduct[]= [];
     errorMessage: string;
 
-    constructor(private _productService : ProductService) {
+    constructor(private _productService: ProductService) {
     }
 
     get listFilter(): string {
@@ -35,18 +35,18 @@ export class ProductListComponent
             product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 
-     toggleImage():void {
+     toggleImage(): void {
        this.showImage = !this.showImage;
     }
 
     ngOnInit(): void {
-        console.log("In OnInit")
+        console.log('In OnInit');
          this._productService.getProducts()
-            .subscribe(products => { 
+            .subscribe(products => {
                         this.products = products;
                         this.filteredProducts = this.products;
                         },
                         error => this.errorMessage = <any>error);
-        
+
     }
 }
